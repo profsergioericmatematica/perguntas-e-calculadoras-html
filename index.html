@@ -3,657 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Régua de Conversão de Unidades - Sistema Métrico</title>
+    <title>Portal UNIVESP - FAQ e Calculadoras</title>
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            margin: 0;
-            padding: 20px;
+            background-color: #f5f5f5;
             color: #333;
-            min-height: 100vh;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
+            padding: 20px;
         }
         
-        .container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .logo-placeholder {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .logo-disclaimer {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
         }
         
         h1 {
-            text-align: center;
-            color: #1a2a6c;
-            margin-bottom: 25px;
             font-size: 2.2rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
         }
         
-        .credits {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #555;
-            font-size: 1.1rem;
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
         
-        .credits a {
-            color: #1a2a6c;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        
-        .credits a:hover {
-            color: #b21f1f;
-            text-decoration: underline;
-        }
-        
-        .category-selector {
+        /* Estilos para as abas */
+        .tabs {
             display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
             justify-content: center;
         }
         
-        .category-btn {
-            padding: 12px 20px;
-            background-color: #e9ecef;
+        .tab-button {
+            padding: 12px 24px;
+            background-color: #f1f1f1;
             border: none;
-            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px 8px 0 0;
+            margin-right: 5px;
             transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 5px;
         }
         
-        .category-btn:hover {
-            background-color: #d8dbe0;
+        .tab-button:hover {
+            background-color: #ddd;
             transform: translateY(-2px);
         }
         
-        .category-btn.active {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+        .tab-button.active {
+            background-color: #2c3e50;
             color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        .metric-ruler {
-            margin: 30px 0;
+        .tab-content {
+            display: none;
             padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
+            background-color: white;
+            border-radius: 0 8px 8px 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            overflow-x: auto;
+            animation: fadeIn 0.5s;
         }
         
-        .ruler-table {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Estilos para o FAQ */
+        .faq-section {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .faq-question:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: normal;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 1000px;
+        }
+        
+        .highlight {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .dates-table {
             width: 100%;
             border-collapse: collapse;
-            text-align: center;
-            margin: 0 auto;
+            margin: 15px 0;
         }
         
-        .ruler-table th, .ruler-table td {
-            padding: 15px 10px;
-            border: 1px solid #ddd;
-            position: relative;
+        .dates-table th, .dates-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
         }
         
-        .ruler-table th {
-            background-color: #1a2a6c;
-            color: white;
+        .dates-table th {
+            background-color: #f2f2f2;
             font-weight: 600;
         }
         
-        .ruler-table td {
-            background-color: white;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #1a2a6c;
-        }
-        
-        .base-unit {
-            background-color: #e8f4fc !important;
-            font-weight: bold;
-            border: 2px solid #1a2a6c !important;
-        }
-        
-        .multiplier {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #b21f1f;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        
-        .divider {
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fdbb2d;
-            color: #333;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-        
-        .converter {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 30px;
-            background-color: #f8f9fa;
+        /* Estilos para as calculadoras */
+        .calculator-container {
+            background: linear-gradient(135deg, #9fbfed, #c2d6f0);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        
-        .input-group {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        input, select {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 16px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #1a2a6c;
-            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
-        }
-        
-        input {
-            flex: 1;
-        }
-        
-        select {
-            min-width: 200px;
-        }
-        
-        .results {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-        
-        .result-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 10px;
-            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 5px solid #1a2a6c;
         }
         
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        .calculator-title {
+            color: #492bb5;
+            margin-bottom: 20px;
         }
         
-        .result-value {
-            font-size: 20px;
+        .calculator-subtitle {
+            color: #2e4999;
+            margin-bottom: 20px;
+        }
+        
+        .calculator-form {
+            margin-bottom: 20px;
+        }
+        
+        .calculator-label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
-            color: #1a2a6c;
-            margin: 10px 0;
-            word-break: break-all;
         }
         
-        .result-unit {
-            color: #6c757d;
-            font-size: 15px;
-        }
-        
-        .info {
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #e8f4fc, #d1ecf1);
-            border-radius: 10px;
-            font-size: 15px;
-            color: #1a2a6c;
-            border-left: 5px solid #1a2a6c;
-        }
-        
-        .footer {
+        .calculator-input {
+            width: 100px;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            box-sizing: border-box;
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #6c757d;
-            font-size: 14px;
+            transition: border-color 0.3s;
         }
         
+        .calculator-input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        .calculator-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 500px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .calculator-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calculator-result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .calculator-info {
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        /* Estilos para a calculadora de PI */
+        .pi-container {
+            background: linear-gradient(135deg, #e9f7e9, #d4edda);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pi-title {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        
+        .pi-form {
+            margin-bottom: 20px;
+        }
+        
+        .pi-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .pi-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        
+        .pi-input:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+        
+        .pi-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        .pi-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pi-result {
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .creator-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .creator-info a {
+            color: #3498db;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+        
+        .creator-info a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .instagram-icon {
+            width: 16px;
+            height: 16px;
+            background-color: #E1306C;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .instagram-icon::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .instagram-icon::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+            top: 3px;
+            right: 3px;
+        }
+        
+        /* Melhorias de responsividade */
         @media (max-width: 768px) {
-            .input-group {
-                flex-direction: column;
+            .container {
+                padding: 10px;
             }
             
-            select {
-                min-width: 100%;
-            }
-            
-            .results {
-                grid-template-columns: 1fr;
+            header {
+                padding: 20px;
             }
             
             h1 {
                 font-size: 1.8rem;
             }
             
-            .ruler-table {
-                font-size: 0.9rem;
+            .faq-question {
+                padding: 15px;
             }
             
-            .ruler-table th, .ruler-table td {
-                padding: 10px 5px;
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                border-radius: 8px;
+                margin-bottom: 5px;
+                width: 100%;
+            }
+            
+            .calculator-input {
+                width: 80px;
             }
         }
         
         @media (max-width: 480px) {
-            .container {
-                padding: 20px 15px;
-            }
-            
-            .category-btn {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-            
             h1 {
                 font-size: 1.5rem;
             }
             
-            .metric-ruler {
-                padding: 10px;
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .calculator-input {
+                width: 70px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Régua de Conversão de Unidades</h1>
-        
-        <div class="credits">
-            Desenvolvido por <strong>Professor Sergio Eric</strong> | 
-            <a href="https://www.instagram.com/prof.sergio.eric.matematica/" target="_blank">@prof.sergio.eric.matematica</a>
+        <!-- Logo da UNIVESP -->
+        <div class="logo-container">
+            <div class="logo-placeholder">
+                <h2 style="margin: 0;">UNIVESP</h2>
+                <p style="margin: 0; font-size: 0.9rem;">Universidade Virtual do Estado de São Paulo</p>
+            </div>
+            <p class="logo-disclaimer">Logo representativo. Verifique as diretrizes de uso de marca antes de utilizar o logo oficial.</p>
         </div>
         
-        <div class="category-selector">
-            <button class="category-btn active" data-category="length">Comprimento</button>
-            <button class="category-btn" data-category="area">Área</button>
-            <button class="category-btn" data-category="volume">Volume</button>
-            <button class="category-btn" data-category="capacity">Capacidade</button>
-            <button class="category-btn" data-category="time">Tempo</button>
+        <header>
+            <h1>Portal do Estudante UNIVESP</h1>
+            <p class="subtitle">Informações sobre provas, cálculo de médias e Projeto Integrador</p>
+        </header>
+        
+        <!-- Sistema de abas -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'tab1')">📅 Provas Regulares</button>
+            <button class="tab-button" onclick="openTab(event, 'tab2')">📝 Tipos de Provas</button>
+            <button class="tab-button" onclick="openTab(event, 'tab3')">🧮 Calculadora de Médias</button>
+            <button class="tab-button" onclick="openTab(event, 'tab4')">📊 Calculadora de PI</button>
         </div>
         
-        <div class="metric-ruler" id="metricRuler">
-            <!-- A régua métrica será gerada dinamicamente via JavaScript -->
+        <!-- Conteúdo da aba 1 - Provas Regulares -->
+        <div id="tab1" class="tab-content active">
+            <section class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">Quando serão realizadas as provas do 4º bimestre de 2025?</div>
+                    <div class="faq-answer">
+                        <p>As provas do 4º bimestre para os cursos de graduação de 2025 acontecerão de <strong>10 a 19 de novembro de 2025</strong>.</p>
+                        <p><strong>Horário:</strong> das 18h às 22h00</p>
+                        <p><strong>Modalidade:</strong> Presencial</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Quem pode realizar as provas?</div>
+                    <div class="faq-answer">
+                        <p>São elegíveis para realizar as provas todos os alunos <strong>matriculados no 4º bimestre de 2025 nas disciplinas regulares</strong>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Há atendimento especial para casos específicos?</div>
+                    <div class="faq-answer">
+                        <div class="highlight">
+                            <p><strong>Guarda religiosa:</strong> Para alunos com registro de "guarda religiosa", não haverá prova de sexta-feira. A prova será realizada na quinta-feira anterior.</p>
+                            <p><strong>Tempo estendido:</strong> Alunos com registro de tempo estendido terão a prova liberada com antecedência, às 16h.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Como consultar as datas específicas das minhas provas?</div>
+                    <div class="faq-answer">
+                        <p>Para informações detalhadas sobre as disciplinas, o aluno pode consultar o <strong>"Calendário de Atividades" individual</strong> dentro da aba "Atividades" no Sistema de Provas, acessível pelo portal.</p>
+                        <p>Lá você poderá verificar quais disciplinas e em quais dias deverá fazer as provas.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Como solicitar declaração de realização de prova?</div>
+                    <div class="faq-answer">
+                        <p>Para provas realizadas na modalidade presencial, a declaração de realização de prova (atestado de presença) poderá ser solicitada ao <strong>Orientador de Polo</strong>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">E se eu perder alguma prova? Como funciona a 2ª chamada?</div>
+                    <div class="faq-answer">
+                        <p>A 2ª chamada é direcionada a alunos que perderam as provas por motivos de saúde, com apresentação de atestado médico.</p>
+                        <p>É necessária a abertura do <strong>requerimento de 2ª chamada no Portal do Aluno em até 48h após a data da prova perdida</strong>, conforme Instrução Normativa presente no Manual do Aluno.</p>
+                        <p>A aplicação das provas de 2ª chamada está prevista para <strong>03 de dezembro</strong>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Posso usar calculadora nas provas?</div>
+                    <div class="faq-answer">
+                        <p>Sim, os alunos podem levar <strong>calculadora científica ou financeira</strong> para realização das provas impressas.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Quais são as datas importantes após as provas?</div>
+                    <div class="faq-answer">
+                        <table class="dates-table">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Período</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Provas</td>
+                                    <td>10 a 19 de novembro</td>
+                                </tr>
+                                <tr>
+                                    <td>Requerimentos de questão de prova</td>
+                                    <td>20 a 23 de novembro</td>
+                                </tr>
+                                <tr>
+                                    <td>Análise interna dos requerimentos</td>
+                                    <td>24 de novembro a 03 de dezembro</td>
+                                </tr>
+                                <tr>
+                                    <td>Retorno dos requerimentos</td>
+                                    <td>A partir de 04 de dezembro</td>
+                                </tr>
+                                <tr>
+                                    <td>Disponibilização das notas</td>
+                                    <td>A partir de 05 de dezembro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Onde posso encontrar mais informações?</div>
+                    <div class="faq-answer">
+                        <p>Para mais informações e tutoriais, acesse nosso <a href="https://prova.univesp.br/runner.php?m=13&it=-1&ptp=c3JjPTk5OTky" target="_blank"><strong>Portal de Provas</strong></a>.</p>
+                    </div>
+                </div>
+            </section>
         </div>
         
-        <div class="converter">
-            <div class="input-group">
-                <input type="text" id="inputValue" value="1" inputmode="decimal" placeholder="Digite o valor (ex: 1.500,75)">
-                <select id="inputUnit"></select>
+        <!-- Conteúdo da aba 2 - Tipos de Provas -->
+        <div id="tab2" class="tab-content">
+            <section class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">Prova com Cartão</div>
+                    <div class="faq-answer">Prova escrita presencial no polo com preenchimento de cartão resposta.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Prova Digital</div>
+                    <div class="faq-answer">Prova virtual presencial no polo com senha.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Prova Online</div>
+                    <div class="faq-answer">Prova virtual, sem senha, realizada opcionalmente no polo.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Provas Regulares</div>
+                    <div class="faq-answer">Provas realizadas após a conclusão das disciplinas que estão sendo cursadas no bimestre.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Provas de 2ª Chamada</div>
+                    <div class="faq-answer">Destinada aos estudantes impedidos de comparecer ao polo por motivo de saúde devidamente justificado por atestado médico.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Provas de Exame</div>
+                    <div class="faq-answer">Provas realizadas quando o aluno não realizou as provas regulares ou quando a média final é menor que 5.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Guarda Religiosa</div>
+                    <div class="faq-answer">Alunos podem solicitar via Portal do Aluno, anexando a declaração da instituição religiosa.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Licença à Maternidade</div>
+                    <div class="faq-answer">Possui um período de 90 dias e deve ser informada via requerimento no Portal do Aluno.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Cálculo da Média Final</div>
+                    <div class="faq-answer">(Nota da Prova Regular x 0,6) + (Média das notas obtidas nas atividades x 0,4) = Média final no bimestre.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Ciclos de Provas</div>
+                    <div class="faq-answer">Um ciclo de provas compreende provas Regulares, DP, 2ª Chamada e Exame.</div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Conteúdo da aba 3 - Calculadora de Médias -->
+        <div id="tab3" class="tab-content">
+            <div class="calculator-container">
+                <h2 class="calculator-title">Calculadora de Média de Notas Bimestrais</h2>
+                <h3 class="calculator-subtitle">UNIVESP - Universidade Virtual do Estado de São Paulo</h3>
+                <p>Desenvolvida em consonância com as regras dos cálculos disponibilizadas pela Universidade</p>
+                
+                <form id="formNotas" class="calculator-form" onsubmit="return calcularMedia()">
+                    <label class="calculator-label" for="nota1">Nota da Avaliativa da Semana 1 (Peso 8%):</label>
+                    <input type="number" id="nota1" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <label class="calculator-label" for="nota2">Nota da Avaliativa da Semana 2 (Peso 12%):</label>
+                    <input type="number" id="nota2" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <label class="calculator-label" for="nota3">Nota da Avaliativa da Semana 3 (Peso 17%):</label>
+                    <input type="number" id="nota3" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <label class="calculator-label" for="nota4">Nota da Avaliativa da Semana 4 (Peso 17%):</label>
+                    <input type="number" id="nota4" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <label class="calculator-label" for="nota5">Nota da Avaliativa da Semana 5 (Peso 17%):</label>
+                    <input type="number" id="nota5" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <label class="calculator-label" for="nota6">Nota da Avaliativa da Semana 6 (Peso 17%):</label>
+                    <input type="number" id="nota6" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <label class="calculator-label" for="nota7">Nota da Avaliativa da Semana 7 (Peso 12%):</label>
+                    <input type="number" id="nota7" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <button type="submit" class="calculator-button">Calcular Média das Avaliativas</button>
+                </form>
+                
+                <div id="resultado1" class="calculator-result"></div>
+                
+                <form id="formProva" class="calculator-form" onsubmit="return calcularMediaProva()">
+                    <label class="calculator-label" for="notaProva">Nota da Prova:</label>
+                    <input type="number" id="notaProva" class="calculator-input" min="0" max="10" step="0.01" required>
+                    
+                    <button type="submit" class="calculator-button">Calcular Média Final</button>
+                </form>
+                
+                <div id="resultado2" class="calculator-result"></div>
+                <div id="mensagem" class="calculator-result"></div>
+                
+                <button class="calculator-button" onclick="recarregarCalculadora()">Limpar Cálculos</button>
+                
+                <div class="calculator-info">
+                    <p>Para calcular a Média das Avaliativas, multiplique cada nota pelo seu respectivo peso e some os resultados.</p>
+                    <p>Para calcular a Média Final, some a Média das Avaliativas x 40%, com a Nota da Prova x 60%.</p>
+                </div>
             </div>
         </div>
         
-        <div class="results" id="resultsContainer">
-            <!-- Resultados serão inseridos aqui via JavaScript -->
+        <!-- Conteúdo da aba 4 - Calculadora de Projeto Integrador -->
+        <div id="tab4" class="tab-content">
+            <div class="pi-container">
+                <h2 class="pi-title">Calculadora de Nota do Projeto Integrador</h2>
+                
+                <div class="pi-form">
+                    <label class="pi-label" for="planoAcao">Nota do Plano de Ação (15%):</label>
+                    <input type="number" id="planoAcao" class="pi-input" min="0" max="10" step="0.1" placeholder="Insira a nota do Plano de Ação">
+
+                    <label class="pi-label" for="relatorioParcial">Nota do Relatório Parcial (25%):</label>
+                    <input type="number" id="relatorioParcial" class="pi-input" min="0" max="10" step="0.1" placeholder="Insira a nota do Relatório Parcial">
+
+                    <label class="pi-label" for="relatorioFinal">Nota do Relatório Final (35%):</label>
+                    <input type="number" id="relatorioFinal" class="pi-input" min="0" max="10" step="0.1" placeholder="Insira a nota do Relatório Final">
+
+                    <label class="pi-label" for="video">Nota do Vídeo (10%):</label>
+                    <input type="number" id="video" class="pi-input" min="0" max="10" step="0.1" placeholder="Insira a nota do Vídeo">
+
+                    <label class="pi-label" for="autoavaliacao">Nota da Autoavaliação (15%):</label>
+                    <input type="number" id="autoavaliacao" class="pi-input" min="0" max="10" step="0.1" placeholder="Insira a nota da Autoavaliação">
+
+                    <button class="pi-button" onclick="calcularNotaPI()">Calcular Nota Final</button>
+                    <button class="pi-button" onclick="limparCalculadoraPI()">Limpar</button>
+                </div>
+
+                <div class="pi-result" id="resultadoPI"></div>
+                
+                <div class="calculator-info">
+                    <p>Para calcular a nota final do Projeto Integrador, multiplique cada nota pelo seu respectivo peso e some os resultados.</p>
+                    <p>Pesos: Plano de Ação (15%), Relatório Parcial (25%), Relatório Final (35%), Vídeo (10%), Autoavaliação (15%).</p>
+                </div>
+            </div>
         </div>
         
-        <div class="info">
-            <p><strong>Instruções:</strong> Selecione uma categoria de unidades, insira um valor e escolha a unidade de origem. Use <strong>vírgula</strong> para separar casas decimais e <strong>ponto</strong> para milhares (ex: 1.500,75). As conversões serão calculadas automaticamente.</p>
-            <p><strong>Régua Métrica:</strong> A tabela acima mostra a relação entre múltiplos e submúltiplos da unidade base. Cada passo para a direita multiplica por 10, cada passo para a esquerda divide por 10.</p>
-        </div>
-        
-        <div class="footer">
-            Ferramenta educacional desenvolvida para auxiliar no ensino de matemática
-        </div>
+        <footer>
+            <p>Bons estudos!</p>
+            <div class="creator-info">
+                <span>Criado por:</span>
+                <a href="https://instagram.com/prof.sergio.eric.matematica" target="_blank" aria-label="Instagram do Professor Sérgio Eric">
+                    <div class="instagram-icon"></div>
+                    @prof.sergio.eric.matematica
+                </a>
+            </div>
+            <p class="logo-disclaimer" style="margin-top: 15px;">
+                Este site é um projeto independente e não é afiliado oficialmente à UNIVESP.
+            </p>
+        </footer>
     </div>
 
     <script>
-        // Definindo as unidades para cada categoria
-        const units = {
-            length: [
-                { name: "Quilômetro", symbol: "km", factor: 1000 },
-                { name: "Hectômetro", symbol: "hm", factor: 100 },
-                { name: "Decâmetro", symbol: "dam", factor: 10 },
-                { name: "Metro", symbol: "m", factor: 1 },
-                { name: "Decímetro", symbol: "dm", factor: 0.1 },
-                { name: "Centímetro", symbol: "cm", factor: 0.01 },
-                { name: "Milímetro", symbol: "mm", factor: 0.001 }
-            ],
-            area: [
-                { name: "Quilômetro quadrado", symbol: "km²", factor: 1000000 },
-                { name: "Hectômetro quadrado", symbol: "hm²", factor: 10000 },
-                { name: "Decâmetro quadrado", symbol: "dam²", factor: 100 },
-                { name: "Metro quadrado", symbol: "m²", factor: 1 },
-                { name: "Decímetro quadrado", symbol: "dm²", factor: 0.01 },
-                { name: "Centímetro quadrado", symbol: "cm²", factor: 0.0001 },
-                { name: "Milímetro quadrado", symbol: "mm²", factor: 0.000001 }
-            ],
-            volume: [
-                { name: "Quilômetro cúbico", symbol: "km³", factor: 1000000000 },
-                { name: "Hectômetro cúbico", symbol: "hm³", factor: 1000000 },
-                { name: "Decâmetro cúbico", symbol: "dam³", factor: 1000 },
-                { name: "Metro cúbico", symbol: "m³", factor: 1 },
-                { name: "Decímetro cúbico", symbol: "dm³", factor: 0.001 },
-                { name: "Centímetro cúbico", symbol: "cm³", factor: 0.000001 },
-                { name: "Milímetro cúbico", symbol: "mm³", factor: 0.000000001 }
-            ],
-            capacity: [
-                { name: "Quilolitro", symbol: "kL", factor: 1000 },
-                { name: "Hectolitro", symbol: "hL", factor: 100 },
-                { name: "Decalitro", symbol: "daL", factor: 10 },
-                { name: "Litro", symbol: "L", factor: 1 },
-                { name: "Decilitro", symbol: "dL", factor: 0.1 },
-                { name: "Centilitro", symbol: "cL", factor: 0.01 },
-                { name: "Mililitro", symbol: "mL", factor: 0.001 }
-            ],
-            time: [
-                { name: "Hora", symbol: "h", factor: 3600 },
-                { name: "Minuto", symbol: "min", factor: 60 },
-                { name: "Segundo", symbol: "s", factor: 1 }
-            ]
-        };
+        // Sistema de abas melhorado
+        function openTab(evt, tabName) {
+            var i, tabContent, tabButtons;
+            
+            // Esconde todos os conteúdos das abas
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            
+            // Remove a classe "active" de todos os botões
+            tabButtons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Mostra a aba atual e adiciona a classe "active" ao botão que abriu a aba
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // Salva a aba ativa no localStorage
+            localStorage.setItem('activeTab', tabName);
+        }
+        
+        // Restaura a aba ativa ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeTab = localStorage.getItem('activeTab');
+            if (activeTab) {
+                // Remove active de todas as abas
+                document.querySelectorAll('.tab-content, .tab-button').forEach(el => {
+                    el.classList.remove('active');
+                });
+                // Ativa a aba salva
+                document.getElementById(activeTab).classList.add('active');
+                document.querySelector(`[onclick="openTab(event, '${activeTab}')"]`).classList.add('active');
+            }
+            
+            // Sistema de FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Fecha todos os outros itens
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Alterna o item atual
+                    item.classList.toggle('active');
+                });
+            });
+        });
+        
+        // Funções da calculadora de médias
+        function calcularMedia() {
+            var nota1 = parseFloat(document.getElementById("nota1").value);
+            var nota2 = parseFloat(document.getElementById("nota2").value);
+            var nota3 = parseFloat(document.getElementById("nota3").value);
+            var nota4 = parseFloat(document.getElementById("nota4").value);
+            var nota5 = parseFloat(document.getElementById("nota5").value);
+            var nota6 = parseFloat(document.getElementById("nota6").value);
+            var nota7 = parseFloat(document.getElementById("nota7").value);
 
-        // Elementos DOM
-        const categoryButtons = document.querySelectorAll('.category-btn');
-        const inputValue = document.getElementById('inputValue');
-        const inputUnit = document.getElementById('inputUnit');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const metricRuler = document.getElementById('metricRuler');
-        
-        // Estado atual
-        let currentCategory = 'length';
-        
-        // Função para converter string no formato brasileiro para número
-        function parseBrazilianNumber(str) {
-            if (str === "" || str === "-") return 0;
-            // Remove pontos de milhar e substitui vírgula decimal por ponto
-            return parseFloat(str.replace(/\./g, '').replace(',', '.'));
+            if (nota1 < 0 || nota1 > 10 || nota2 < 0 || nota2 > 10 || nota3 < 0 || nota3 > 10 || 
+                nota4 < 0 || nota4 > 10 || nota5 < 0 || nota5 > 10 || nota6 < 0 || nota6 > 10 || 
+                nota7 < 0 || nota7 > 10) {
+                alert("Por favor, insira notas válidas entre 0 e 10.");
+                return false;
+            }
+
+            var media = nota1 * 0.08 + nota2 * 0.12 + nota3 * 0.17 + nota4 * 0.17 + 
+                        nota5 * 0.17 + nota6 * 0.17 + nota7 * 0.12;
+            document.getElementById("resultado1").innerHTML = "<span class='resultado'>A Média das Avaliativas é: " + media.toFixed(2) + "</span>";
+
+            return false; // Impede o formulário de ser enviado
+        }
+
+        function calcularMediaProva() {
+            var notaProva = parseFloat(document.getElementById("notaProva").value);
+
+            if (notaProva < 0 || notaProva > 10) {
+                alert("Por favor, insira uma nota da prova válida entre 0 e 10.");
+                return false;
+            }
+
+            var mediaAvaliativaText = document.getElementById("resultado1").innerHTML;
+            if (!mediaAvaliativaText) {
+                alert("Por favor, calcule primeiro a média das avaliativas.");
+                return false;
+            }
+            
+            var mediaAvaliativa = parseFloat(mediaAvaliativaText.split(": ")[1]);
+            var mediaFinal = mediaAvaliativa * 0.4 + notaProva * 0.6;
+
+            document.getElementById("resultado2").innerHTML = "<span class='resultado'>A média final é igual a Média das Avaliativas x 40% + Nota da Prova x 60% = "  + 
+                mediaAvaliativa.toFixed(2) + " x 40% + " + notaProva.toFixed(2) + " x 60% = <b style='font-size: 110%;'>" + mediaFinal.toFixed(2) + "</b></span>";
+
+            var mensagem = document.getElementById("mensagem");
+            mensagem.style.fontSize = "18px";
+
+            if (mediaFinal >= 5) {
+                mensagem.innerHTML = "<p><span style='font-weight: bold; color: green;'>Parabéns! Você foi APROVADO na Disciplina</span></p>";
+            } else {
+                var notaExame = (10 - mediaFinal).toFixed(2);
+                mensagem.innerHTML = "<p><span style='font-weight: bold; color: red;'>Infelizmente, você não obteve média para passar na Disciplina, mas não desanime, estude para fazer o Exame e você irá conseguir! <br> <span style='font-weight: bold; color: blue;'>Você precisará tirar nota <span style='color: green;'>" + notaExame + "</span> no Exame para obter média 5,00 e ser APROVADO(A) na disciplina.</span></span></p>";
+            }
+
+            return false; // Impede o formulário de ser enviado
+        }
+
+        function recarregarCalculadora() {
+            document.getElementById("formNotas").reset();
+            document.getElementById("formProva").reset();
+            document.getElementById("resultado1").innerHTML = "";
+            document.getElementById("resultado2").innerHTML = "";
+            document.getElementById("mensagem").innerHTML = "";
         }
         
-        // Função para formatar número para string no formato brasileiro
-        function formatBrazilianNumber(num) {
-            if (isNaN(num) || !isFinite(num)) return 'Valor inválido';
+        // Funções da calculadora de Projeto Integrador
+        function calcularNotaPI() {
+            // Obtendo os valores inseridos
+            var planoAcao = parseFloat(document.getElementById('planoAcao').value) || 0;
+            var relatorioParcial = parseFloat(document.getElementById('relatorioParcial').value) || 0;
+            var relatorioFinal = parseFloat(document.getElementById('relatorioFinal').value) || 0;
+            var video = parseFloat(document.getElementById('video').value) || 0;
+            var autoavaliacao = parseFloat(document.getElementById('autoavaliacao').value) || 0;
+
+            // Calculando a nota final com base nos pesos
+            var notaFinal = (planoAcao * 0.15) + (relatorioParcial * 0.25) + 
+                            (relatorioFinal * 0.35) + (video * 0.10) + 
+                            (autoavaliacao * 0.15);
+
+            // Exibindo o resultado
+            document.getElementById('resultadoPI').innerHTML = "Sua nota final do Projeto Integrador é: <strong>" + notaFinal.toFixed(2) + "</strong>";
             
-            // Para números muito pequenos, usar notação científica
-            if (num !== 0 && Math.abs(num) < 0.0001) {
-                return num.toExponential(4).replace('.', ',');
+            // Adicionando mensagem de aprovação/reprovação
+            if (notaFinal >= 6) {
+                document.getElementById('resultadoPI').innerHTML += "<p style='color: green; font-weight: bold; margin-top: 10px;'>Parabéns! Você foi APROVADO no Projeto Integrador!</p>";
+            } else {
+                document.getElementById('resultadoPI').innerHTML += "<p style='color: red; font-weight: bold; margin-top: 10px;'>Infelizmente, você não atingiu a média necessária (6.0).</p>";
             }
-            
-            // Para números inteiros ou com poucas casas decimais
-            if (Number.isInteger(num) || num.toString().split('.')[1]?.length <= 2) {
-                return num.toLocaleString('pt-BR', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 6
-                });
-            }
-            
-            // Para números com mais casas decimais
-            return num.toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 6
-            });
         }
         
-        // Função para criar a régua métrica
-        function createMetricRuler() {
-            // Limpa o conteúdo anterior
-            metricRuler.innerHTML = '';
-            
-            // Se a categoria for tempo, não mostra a régua métrica
-            if (currentCategory === 'time') {
-                metricRuler.style.display = 'none';
-                return;
-            }
-            
-            metricRuler.style.display = 'block';
-            
-            // Cria a tabela da régua métrica
-            const table = document.createElement('table');
-            table.className = 'ruler-table';
-            
-            // Cria o cabeçalho
-            const thead = document.createElement('thead');
-            const headerRow = document.createElement('tr');
-            
-            const th1 = document.createElement('th');
-            th1.textContent = 'Múltiplos';
-            th1.colSpan = 3;
-            
-            const th2 = document.createElement('th');
-            th2.textContent = 'Base';
-            
-            const th3 = document.createElement('th');
-            th3.textContent = 'Submúltiplos';
-            th3.colSpan = 3;
-            
-            headerRow.appendChild(th1);
-            headerRow.appendChild(th2);
-            headerRow.appendChild(th3);
-            thead.appendChild(headerRow);
-            table.appendChild(thead);
-            
-            // Cria o corpo da tabela
-            const tbody = document.createElement('tbody');
-            const bodyRow = document.createElement('tr');
-            
-            // Adiciona as células com as unidades
-            const currentUnits = units[currentCategory];
-            
-            // Encontra o índice da unidade base (fator = 1)
-            let baseIndex = 0;
-            for (let i = 0; i < currentUnits.length; i++) {
-                if (currentUnits[i].factor === 1) {
-                    baseIndex = i;
-                    break;
-                }
-            }
-            
-            // Adiciona as unidades à esquerda (múltiplos)
-            for (let i = baseIndex - 3; i < baseIndex; i++) {
-                if (i >= 0) {
-                    const td = document.createElement('td');
-                    td.textContent = currentUnits[i].symbol;
-                    
-                    // Adiciona o multiplicador acima da célula
-                    const multiplier = document.createElement('div');
-                    multiplier.className = 'multiplier';
-                    multiplier.textContent = `×10`;
-                    td.appendChild(multiplier);
-                    
-                    bodyRow.appendChild(td);
-                } else {
-                    const td = document.createElement('td');
-                    bodyRow.appendChild(td);
-                }
-            }
-            
-            // Adiciona a unidade base
-            const baseTd = document.createElement('td');
-            baseTd.textContent = currentUnits[baseIndex].symbol;
-            baseTd.className = 'base-unit';
-            bodyRow.appendChild(baseTd);
-            
-            // Adiciona as unidades à direita (submúltiplos)
-            for (let i = baseIndex + 1; i <= baseIndex + 3; i++) {
-                if (i < currentUnits.length) {
-                    const td = document.createElement('td');
-                    td.textContent = currentUnits[i].symbol;
-                    
-                    // Adiciona o divisor abaixo da célula
-                    const divider = document.createElement('div');
-                    divider.className = 'divider';
-                    divider.textContent = `÷10`;
-                    td.appendChild(divider);
-                    
-                    bodyRow.appendChild(td);
-                } else {
-                    const td = document.createElement('td');
-                    bodyRow.appendChild(td);
-                }
-            }
-            
-            tbody.appendChild(bodyRow);
-            table.appendChild(tbody);
-            
-            metricRuler.appendChild(table);
+        function limparCalculadoraPI() {
+            document.getElementById('planoAcao').value = '';
+            document.getElementById('relatorioParcial').value = '';
+            document.getElementById('relatorioFinal').value = '';
+            document.getElementById('video').value = '';
+            document.getElementById('autoavaliacao').value = '';
+            document.getElementById('resultadoPI').innerHTML = '';
         }
-        
-        // Inicialização
-        function init() {
-            // Adiciona eventos aos botões de categoria
-            categoryButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove a classe active de todos os botões
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    // Adiciona a classe active ao botão clicado
-                    button.classList.add('active');
-                    // Atualiza a categoria atual
-                    currentCategory = button.dataset.category;
-                    // Atualiza a interface
-                    updateUnits();
-                    createMetricRuler();
-                    updateResults();
-                });
-            });
-            
-            // Adiciona eventos aos inputs
-            inputValue.addEventListener('input', updateResults);
-            inputUnit.addEventListener('change', updateResults);
-            
-            // Valida entrada para aceitar apenas números, ponto e vírgula
-            inputValue.addEventListener('keypress', function(e) {
-                const char = String.fromCharCode(e.keyCode || e.which);
-                // Permite números, ponto, vírgula, backspace, delete, tab, etc.
-                if (!/[\d,.]/.test(char) && 
-                    !(e.keyCode === 8 || e.keyCode === 46 || e.keyCode === 9 || 
-                      e.keyCode === 37 || e.keyCode === 39)) {
-                    e.preventDefault();
-                }
-                
-                // Permite apenas uma vírgula
-                if (char === ',' && this.value.includes(',')) {
-                    e.preventDefault();
-                }
-                
-                // Permite apenas pontos antes da vírgula (para milhares)
-                if (char === '.' && this.value.includes('.')) {
-                    e.preventDefault();
-                }
-            });
-            
-            // Permite colar, mas filtra o conteúdo
-            inputValue.addEventListener('paste', function(e) {
-                e.preventDefault();
-                let pastedText = e.clipboardData.getData('text');
-                // Remove caracteres não numéricos exceto vírgula e ponto
-                pastedText = pastedText.replace(/[^\d,.]/g, '');
-                document.execCommand('insertText', false, pastedText);
-            });
-            
-            // Inicializa a interface
-            updateUnits();
-            createMetricRuler();
-            updateResults();
-        }
-        
-        // Atualiza as opções de unidade
-        function updateUnits() {
-            // Limpa as opções atuais
-            inputUnit.innerHTML = '';
-            
-            // Adiciona as novas opções baseadas na categoria atual
-            units[currentCategory].forEach(unit => {
-                const option = document.createElement('option');
-                option.value = unit.factor;
-                option.textContent = `${unit.name} (${unit.symbol})`;
-                inputUnit.appendChild(option);
-            });
-        }
-        
-        // Atualiza os resultados
-        function updateResults() {
-            // Limpa os resultados atuais
-            resultsContainer.innerHTML = '';
-            
-            // Obtém o valor e a unidade de entrada
-            const value = parseBrazilianNumber(inputValue.value) || 0;
-            const inputFactor = parseFloat(inputUnit.value);
-            
-            // Verifica se o valor é válido
-            if (isNaN(value)) {
-                const errorCard = document.createElement('div');
-                errorCard.className = 'result-card';
-                errorCard.innerHTML = `
-                    <div class="result-value" style="color: #b21f1f;">Valor inválido</div>
-                    <div class="result-unit">Use números, ponto para milhares e vírgula para decimais</div>
-                `;
-                resultsContainer.appendChild(errorCard);
-                return;
-            }
-            
-            // Calcula o valor na unidade base
-            const baseValue = value * inputFactor;
-            
-            // Cria os cards de resultado para cada unidade
-            units[currentCategory].forEach(unit => {
-                // Calcula o valor convertido
-                const convertedValue = baseValue / unit.factor;
-                
-                // Formata o valor para exibição no formato brasileiro
-                const displayValue = formatBrazilianNumber(convertedValue);
-                
-                // Cria o elemento de resultado
-                const resultCard = document.createElement('div');
-                resultCard.className = 'result-card';
-                resultCard.innerHTML = `
-                    <div class="result-value">${displayValue}</div>
-                    <div class="result-unit">${unit.name} (${unit.symbol})</div>
-                `;
-                
-                // Adiciona ao container
-                resultsContainer.appendChild(resultCard);
-            });
-        }
-        
-        // Inicializa a aplicação
-        init();
     </script>
 </body>
 </html>
